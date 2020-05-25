@@ -1,0 +1,153 @@
+    <div class='body'>
+      <div class='container'>
+
+<p id="notice"><%= notice %></p>
+
+  <div class='row'>
+
+  <div class='col-xs-3'>
+    <h2>User info</h2>
+
+
+<table class='table'>
+
+    <tr>
+      <th><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></th>
+    </tr>
+
+    <tr>
+      <th>name</th><th><%= @user.name %></th>
+    </tr>
+
+    <tr>
+      <th>introduction</th><th><%= @user.introduction %></th>
+    </tr>
+
+</table>
+
+<div class='row'>
+
+    <% if @user.id == current_user.id %>
+    <%= link_to("", "/users/#{@user.id}/edit", { class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench"}) %>
+
+    <% else %>
+
+    <%= link_to user_path(current_user.id), class: 'col-xs-12 btn btn-default glyphicon glyphicon-wrench' do %>
+    <% end %>
+    <% end %>
+
+
+
+
+
+
+
+<h2>New book</h2>
+
+<%= form_for(@newbook) do |f| %>
+  <% if @newbook.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@newbook.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% @newbook.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div class="field row">
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title, class:"col-xs-12 book_title" %>
+  </div>
+</div>
+
+
+ <div class="field row">
+  <div class="field">
+    <%= f.label :Opinion %>
+    <%= f.text_area :body, class:"col-xs-12 book_title" %>
+  </div>
+</div>
+
+
+ <div class="actions row">
+  <div class="actions">
+    <%= f.submit('Create Book',class: 'btn btn-primary col-xs-12')%>
+  </div>
+ </div>
+<% end %>
+</div>
+</div>
+
+
+
+
+
+
+
+
+  <div class='col-xs-9'>
+    <h2>Book detail</h2>
+    <table class='table'>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+      	<td><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %><br />
+          <%= link_to(@user.name, "/users/#{@user.id}") %>
+        </td>
+        <td><%= @book.title %></td>
+        <td><%= @book.body %></td>
+
+
+        <% if @book.user.id == current_user.id %>
+        <td><%= link_to("Edit", "/books/#{@book.id}/edit", { class: "btn-sm btn-success edit"}) %></td>
+
+        <td><%= link_to  book_path(@book), method: :delete, data: { confirm: '本当に消しますか?' }, class: 'btn-sm btn-danger destroy' do%>
+          <span>Destroy</span>
+        <% end %>
+        </td>
+        <% end %>
+      </tr>
+
+  </tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <footer>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-xs-3 col-xs-offset-9'>
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+

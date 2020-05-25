@@ -1,0 +1,56 @@
+    <div class='body'>
+      <div class='container'>
+
+        <p id="notice"></p>
+
+<h2>User info</h2>
+
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Name %>
+    <%= f.text_field :name %>
+  </div>
+
+        <%= f.label :Image %>
+        <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+
+    <label class="control-label sr-only" for="inputEmail">ProfileImage</label>
+    <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
+
+
+
+
+  <div class="field">
+    <%= f.label :Introduction %>
+    <%= f.text_area :introduction %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+    </div>
+    </div>
+
+    <footer>
+  <div class='container'>
+    <div class='row'>
+      <div class='col-xs-3 col-xs-offset-9'>
+        <p>CopyRight Infratop.inc</p>
+      </div>
+    </div>
+  </div>
+</footer>
